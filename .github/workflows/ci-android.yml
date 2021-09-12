@@ -79,7 +79,7 @@ jobs:
 
     - name: Build library
       run: |
-        sh ./compile.sh
+        ./compile.sh
 
     - name: Package library
       uses: TheDoctor0/zip-release@0.6.0
