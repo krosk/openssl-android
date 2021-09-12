@@ -6,6 +6,8 @@ PARALLEL=false
 
 mkdir -p build
 
+wget -nc https://github.com/openssl/openssl/archive/refs/tags/OpenSSL_1_1_1j.tar.gz -O openssl-1.1.1j.tar.gz
+
 build() {
 	ARCH=$1
 	NO_ASM=""
@@ -70,10 +72,10 @@ build() {
 
 	cd ../..
 
-	rm -rf lib-$ARCH
-	mkdir -p lib-$ARCH
-	cp build/$ARCH/libcrypto.so.sdl.1.so lib-${ARCH}/libcrypto.so.sdl.1.so || exit 1
-	cp build/$ARCH/libssl.so.sdl.1.so lib-${ARCH}/libssl.so.sdl.1.so || exit 1
+	rm -rf release/lib/$ARCH
+	mkdir -p release/lib/$ARCH
+	cp build/$ARCH/libcrypto.so.sdl.1.so release/lib/${ARCH}/libcrypto.so.sdl.1.so || exit 1
+	cp build/$ARCH/libssl.so.sdl.1.so release/lib/${ARCH}/libssl.so.sdl.1.so || exit 1
 }
 
 
@@ -93,8 +95,8 @@ else
 	done
 fi
 
-rm -rf include
-cp -r -L build/arm64-v8a/include ./ || exit 1
-patch -p1 < opensslconf.h.patch || exit 1
+rm -rf ./release/include
+cp -r -L build/arm64-v8a/include ./release/ || exit 1
+patch -d release -p1 < opensslconf.h.patch || exit 1
 
 rm -rf build
