@@ -81,6 +81,8 @@ jobs:
 
     - name: Build library
       run: |
+        ls -al
+        echo $PWD
         ./compile.sh
 
     - name: Package library
