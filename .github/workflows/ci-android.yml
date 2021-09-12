@@ -40,7 +40,7 @@ jobs:
         sudo chown -R runner /opt/android-sdk-linux
         sudo chgrp -R docker /opt/android-sdk-linux
         sudo chown -R runner $GITHUB_WORKSPACE
-        sudo chown -R docker $GITHUB_WORKSPACE
+        sudo chgrp -R docker $GITHUB_WORKSPACE
 
     - name: Install Android SDK tools
       working-directory: /opt/android-sdk-linux
