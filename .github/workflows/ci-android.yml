@@ -39,8 +39,6 @@ jobs:
         sudo mkdir /opt/android-sdk-linux
         sudo chown -R runner /opt/android-sdk-linux
         sudo chgrp -R docker /opt/android-sdk-linux
-        sudo chown -R runner $GITHUB_WORKSPACE
-        sudo chgrp -R docker $GITHUB_WORKSPACE
 
     - name: Install Android SDK tools
       working-directory: /opt/android-sdk-linux
@@ -81,9 +79,7 @@ jobs:
 
     - name: Build library
       run: |
-        ls -al
-        echo $PWD
-        ./compile.sh
+        sh ./compile.sh
 
     - name: Package library
       uses: TheDoctor0/zip-release@0.6.0
